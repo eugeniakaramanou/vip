@@ -1,0 +1,37 @@
+.app {
+    text-align: center;
+}
+
+.header,
+.footer {
+    background: #dddddd;
+    height: 100px;
+}
+
+.product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.product__name {
+    flex: 1 0 100%;
+}
+
+.product__images {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product__thumbnail {
+    flex: 0 0 100%;
+    @media only screen and (min-width: 768px) {
+        flex: 0 0 30%;
+    }
+}
