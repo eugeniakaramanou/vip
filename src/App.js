@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import './App.scss';
-import Overview from './components/overview';
+import './styles/App.scss';
+import ProductView from './components/product-view';
+
 
 class App extends Component {
     render() {
         return (
             <div className="app">
                 <header className="header" />
-                <Overview />
+                <ProductView />
                 <footer className="footer" />
             </div>
         );
