@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Lightbox from "./lightbox";
 
-const getImageUrl = (uri, size = 'small') => {
+export function getImageUrl(uri, size = 'small') {
     if (size === 'large') {
         return 'https://'+ uri + '_27.png';
     }
@@ -17,6 +17,7 @@ const ProductView = ({ name, images, isOpen, requestedImage, lightboxCallbacks})
                 images.map( (image, index) =>
                     <li className="product__thumbnail" key={index}>
                         <img alt={name}
+                             className="product__thumbnail__img"
                              src={getImageUrl(image.uri)}
                              onClick={ () => lightboxCallbacks.openLightbox(getImageUrl(image.uri, 'large'))}
                         />

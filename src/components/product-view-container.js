@@ -11,24 +11,31 @@ class ProductViewContainer extends Component {
             isOpen: false,
             images: [],
             productName: '',
-            requestedImage: ''
+            requestedImage: '',
+            errorStatus: ''
         };
         this.openLightboxHandler = this.openLightboxHandler.bind(this);
         this.closeLightboxHandler = this.closeLightboxHandler.bind(this);
     }
 
-    componentDidMount() {
-        fetch(`${API_URL}`, {method: "GET"})
-            .then((response) => response.json())
-            .then((responseData) => {
-                this.setState({
-                    images: responseData.images,
-                    productName: responseData.title});
-                window.state = this.state;
-            })
-            .catch((error) => {
-                console.log('Error fetching the images from api', error);
+    async componentDidMount() {
+        const response = await fetch(`${API_URL}`, {method: "GET"});
+        if (response.status >= 400) {
+            this.setState({
+                errorStatus: 'Error fetching data'
             });
+        } else {
+            response.json()
+                .then((responseData) => {
+                    this.setState({
+                        images: responseData.images,
+                        productName: responseData.title});
+                    window.state = this.state;
+                })
+                .catch((error) => {
+                    console.log('Error fetching the images from api', error);
+                });
+        }
     }
 
     openLightboxHandler = (imageUrl) => {
@@ -45,15 +52,20 @@ class ProductViewContainer extends Component {
     };
 
     render() {
-        return <ProductView
-            name={this.state.productName}
-            images={this.state.images}
-            isOpen={this.state.isOpen}
-            requestedImage={this.state.requestedImage}
-            lightboxCallbacks = {{
-                'openLightbox': this.openLightboxHandler,
-                'closeLightbox': this.closeLightboxHandler
-            }} />
+        return (
+            this.state.errorStatus ?
+                <div>{this.state.errorStatus}</div>
+                :
+                <ProductView
+                    name={this.state.productName}
+                    images={this.state.images}
+                    isOpen={this.state.isOpen}
+                    requestedImage={this.state.requestedImage}
+                    lightboxCallbacks={{
+                        'openLightbox': this.openLightboxHandler,
+                        'closeLightbox': this.closeLightboxHandler
+                    }}/>
+        );
     }
 }
 

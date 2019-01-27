@@ -1,5 +1,9 @@
 .app {
     text-align: center;
+    position: relative;
+    @media only screen and (min-width: 768px) {
+        position: initial;
+    }
 }
 
 .header,
@@ -31,7 +35,12 @@
 
 .product__thumbnail {
     flex: 0 0 100%;
+
     @media only screen and (min-width: 768px) {
         flex: 0 0 30%;
     }
+}
+
+.product__thumbnail__img {
+    cursor: pointer;
 }
