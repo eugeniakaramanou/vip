@@ -5,17 +5,19 @@ class ProductViewContainer extends Component {
     constructor() {
         super(...arguments);
         this.state = {
-            isOpen: true
-        }
+            isOpen: false
+        };
+        this.openLightboxHandler = this.openLightboxHandler.bind(this);
+        this.closeLightboxHandler = this.closeLightboxHandler.bind(this);
     }
 
-    openLightbox = () => {
+    openLightboxHandler = () => {
         this.setState({
             isOpen: true
         });
     };
 
-    closeLightbox = () => {
+    closeLightboxHandler = () => {
         this.setState({
             isOpen: false
         });
@@ -23,9 +25,11 @@ class ProductViewContainer extends Component {
 
     render() {
         return <ProductView
-            show={this.state.isOpen}
-            openLightboxHandler={this.openLightbox.bind(this)}
-            closeLightboxHandler={this.closeLightbox.bind(this)} />
+            isOpen={this.state.isOpen}
+            lightboxCallbacks = {{
+                'openLightbox': this.openLightboxHandler,
+                'closeLightbox': this.closeLightboxHandler
+            }} />
     }
 }
 

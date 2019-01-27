@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './styles/App.scss';
-import ProductView from './components/product-view';
+import ProductViewContainer from './components/product-view-container';
 
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
         return (
             <div className="app">
                 <header className="header" />
-                <ProductView />
+                <ProductViewContainer />
                 <footer className="footer" />
             </div>
         );
